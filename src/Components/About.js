@@ -1,14 +1,9 @@
-import React, { useEffect } from 'react'
-import { useContext } from 'react'
-import noteContext from '../Context/notes/noteContext'
-function About() {
-    const a= useContext(noteContext)
-    useEffect(()=>{
-       a.update() 
-    },[])
+// import React, { useEffect,useContext } from 'react'
+// import noteContext from '../Context/notes/noteContext'
+function About() {   
     return (
         <div>
-         this is about {a.state.name} and his rollno is {a.state.roll}
+         this is about 
         </div>
     )
 }
