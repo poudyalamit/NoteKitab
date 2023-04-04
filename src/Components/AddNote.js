@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react'
 import noteContext from '../Context/notes/noteContext';
-
+import NoteItem from './NoteItem';
 const AddNote = () => {
     const context = useContext(noteContext);
-    const { addNote } = context;
-    const [note, setNote] = useState({ title: '', description: "", tag: "" })
+    const {Addnote,notes} = context;
+    const [note, setNote] = useState({ title: "", description: "", tag: "" })
     const handleadd = () => {
-        addNote(note.title,note.description,note.tag('default'));
+        Addnote(note.title,note.description,note.tag('default'));
     }
     const onchange = (e) => {
         e.preventDefault();
@@ -33,6 +33,12 @@ const AddNote = () => {
                 </form>
 
             </div>
+            <div className="row my-3">
+            <h2>Your Notes</h2> 
+            {notes.map((note)=>{
+                return <NoteItem key={note._id} note={note}/>  
+            })}
+        </div>
         </div>
     )
 }
