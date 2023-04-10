@@ -11,7 +11,7 @@ const AddNotes = () => {
         addNote(note.title, note.description, note.tag);
     }
     const onchange = async (e) => {
-        setNote({ ...note, [e.target.name]: e.target.value })
+        setNote({ ...note, [e.target.id]: e.target.value })
     }
     return (
         <div className="container my-3">
