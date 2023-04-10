@@ -5,12 +5,12 @@ const AddNotes = () => {
     const context = useContext(noteContext);
     const { addNote } = context;
     const [note, setNote] = useState({ title: "", description: "", tag: "" })
-    const handleadd = () => {
+    const handleadd = (e) => {
         console.log("added");
-        addNote(note.title, note.description, note.tag('default'));
+        e.preventDefault();
+        addNote(note.title, note.description, note.tag);
     }
     const onchange = async (e) => {
-        e.preventDefault();
         setNote({ ...note, [e.target.name]: e.target.value })
     }
     return (
