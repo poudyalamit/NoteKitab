@@ -3,7 +3,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa"
 import noteContext from '../Context/notes/noteContext';
 
 const NoteItem = (props) => {
-    const { note } = props;
+    const { note ,updateNote} = props;
     const context = useContext(noteContext);
     const { deleteNote } = context;
     return (
@@ -13,7 +13,7 @@ const NoteItem = (props) => {
                     <div className="d-flex align-items-center">
                         <h5 className="card-title">{note.title}</h5>
                         <i className='mx-2' onClick={() => { deleteNote(note._id) }}><FaTrashAlt /></i>
-                        <i className='mx-2'><FaEdit /></i>
+                        <i className='mx-2' onClick={()=>{updateNote(note)}}><FaEdit /></i>
                     </div>
                     <p className="card-text">{note.description}</p>
                 </div>
