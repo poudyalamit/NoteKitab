@@ -5,19 +5,21 @@ import NoteItem from './NoteItem';
 
 const Notes = () => {
     const context = useContext(noteContext);
-    const { notes, getNotes } = context;
+    const { notes, getNotes,editNote } = context;
     useEffect(() => {
-        getNotes()
+        getNotes();
     }, [])
+    const [note, setNote] = useState({ id: '',etitle: "", edescription: "", etag: "" })
+    const ref = useRef(null);
+    const refclose=useRef(null);
     const updateNote = (currentNote) => {
         ref.current.click();
-        setNote({etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag});
+        setNote({id:currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag});
     }
-    const ref = useRef(null);
-    const [note, setNote] = useState({ etitle: "", edescription: "", etag: "" })
-    const handleupdate = (e) => {
+    const handleupdate = () => {
         console.log("updated", note);
-        e.preventDefault();
+        refclose.current.click();
+        editNote(note.id,note.etitle,note.edescription,note.etag);
     }
     const onchange = async (e) => {
         setNote({ ...note, [e.target.id]: e.target.value })
@@ -25,7 +27,7 @@ const Notes = () => {
     return (
         <>
             <AddNotes />
-            <button className='d-none' ref={ref} type="button" classname="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button className='d-none btn btn-primary' ref={ref} type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch modal
             </button>
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -52,7 +54,7 @@ const Notes = () => {
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button ref={refclose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" onClick={handleupdate} className="btn btn-primary">Update Note</button>
                         </div>
                     </div>
