@@ -30,20 +30,11 @@ const NoteState = (props) => {
                 "Content-Type": "application/json",
                 "authtoken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQwYzVhZTM5MjU0OTBlNjhhYmE5MzNiIn0sImlhdCI6MTY3ODUzMTM0MH0.n6GnXg9iYysXu0XzwAbrMWHzLMBls-XxtFDDK5DoQOo"
             },
-            body: JSON.stringify({title,description,tag}), 
+            body: JSON.stringify({title,description,tag})
         });
-        const note = {
-            "_id": "61322f119553781a8ca8d0e08",
-            "user": "6131dc5e3e4037cd4734a0664",
-            "title": title,
-            "description": description,
-            "tag": tag,
-            "date": "2021-09-03T14:20:09.668Z",
-            "__v": 0
-          };
+        const note=await response.json();
         setNotes(notes.concat(note))
-        const json=response.json();
-        console.log(json);
+        
     }
     //Delete a note
     const deleteNote = async (id) => {
@@ -56,8 +47,7 @@ const NoteState = (props) => {
             },
              
         });
-        const json =response.json();
-        console.log(json);
+        const json= await response.json();
         const newNotes = notes.filter((note) => { return note._id !== id })
         setNotes(newNotes);
     }
@@ -75,7 +65,6 @@ const NoteState = (props) => {
             body: JSON.stringify({title,description,tag}), // body data type must match "Content-Type" header
         });
         const json= await response.json();
-        console.log(json);
 
         let newNotes=JSON.parse(JSON.stringify(notes))
         //Logic to edit in client
