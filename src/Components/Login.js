@@ -1,35 +1,34 @@
 import React from 'react'
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 const Login = (props) => {
-  const[credentials,setCredentials]=useState({email:"",password:""})
-  let history= useHistory();
+  const [credentials, setCredentials] = useState({ email: "", password: "" })
+  let navigate = useNavigate();
 
   const handlelogin = async (e) => {
-    e.preventDefault(); 
-    const response = await fetch("http://localhost:5000/api/auth/login",{
+    e.preventDefault();
+    const response = await fetch("http://localhost:5000/api/auth/login", {
       method: "POST",
       headers: {
-          "Content-Type": "application/json",
-          "authtoken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQwYzVhZTM5MjU0OTBlNjhhYmE5MzNiIn0sImlhdCI6MTY3ODUzMTM0MH0.n6GnXg9iYysXu0XzwAbrMWHzLMBls-XxtFDDK5DoQOo"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({email:credentials.email,password: credentials.password})
-  });
-  const json= await response.json();
-  console.log(json); 
-  if(json.success){
-    // save the auth token and redirect
-    localStorage.setItem('token',json.authtoken);
-    history.push("/");
-  }
+      body: JSON.stringify({ email: credentials.email, password: credentials.password })
+    });
+    const json = await response.json();
+    console.log(json);
+    if (json.success) {
+      // save the auth token and redirect
+      localStorage.setItem('token', json.authtoken);
+      navigate("/");
+    }
 
-}
-const onchange = async (e) => {
-  setCredentials({ ...credentials, [e.target.id]: e.target.value })
-}
+  }
+  const onchange = async (e) => {
+    setCredentials({ ...credentials, [e.target.id]: e.target.value })
+  }
   return (
     <div>
-      <form  onSubmit={handlelogin}>
+      <form onSubmit={handlelogin}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
           <input type="email" className="form-control" id="email" name='email' aria-describedby="emailHelp" value={credentials.email} onChange={onchange} />
