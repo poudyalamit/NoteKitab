@@ -1,7 +1,8 @@
 import React ,{useState}from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const SignUp = (props) => {
+  
   const [credentials, setCredentials] = useState({ name:"", email: "", password: "", cpassword: "" })
   let navigate = useNavigate();
   const handlesign = async (e) => {
@@ -29,7 +30,8 @@ const SignUp = (props) => {
     setCredentials({ ...credentials, [e.target.id]: e.target.value })
   }
   return (
-    <div className='Container'>
+    <div className='Container mt-2'>
+      <h2>Create an account to use NoteKitab</h2>
       <form onSubmit={handlesign}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Name</label>
@@ -47,7 +49,12 @@ const SignUp = (props) => {
           <label htmlFor="cpassword" className="form-label">Confirm Password</label>
           <input type="password" className="form-control" id="cpassword"  onChange={onChange} minLength={5} required />
         </div>
-        <button type="submit" className="btn btn-primary">Sign Up</button>
+        
+        <div className="mb-3">
+          Already Have an account?
+          <Link to='/login'>Login</Link>
+        </div>
+        <button type="submit" className="btn btn-primary" >Sign Up</button>
       </form>
     </div>
   )

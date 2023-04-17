@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const Login = (props) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" })
   let navigate = useNavigate();
@@ -31,7 +31,8 @@ const Login = (props) => {
     setCredentials({ ...credentials, [e.target.id]: e.target.value })
   }
   return (
-    <div>
+    <div className='mt-3'>
+      <h2>Login to Continue to NoteKitab</h2>
       <form onSubmit={handlelogin}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
@@ -40,6 +41,10 @@ const Login = (props) => {
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
           <input type="password" className="form-control" id="password" name='password' value={credentials.password} onChange={onchange} />
+        </div>
+        <div className="mb-3">
+          Don't Have an account?
+          <Link to='/signup'>SignUp</Link>
         </div>
         <button type="submit" className="btn btn-primary">Login</button>
       </form>
