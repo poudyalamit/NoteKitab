@@ -35,13 +35,6 @@ router.post('/createUser', [
       email: req.body.email,
     })
 
-    // .then(user => res.json(user))
-    // .catch(err=>{console.log(err)
-    // res.json({error: 'Please enter unique value for email',message:err.message})})
-    // console.log(req.body);  
-    // const user=User(req.body);
-    // user.save()
-    // res.send(req.body)
     const data = {
       user: {
         id: user.id
