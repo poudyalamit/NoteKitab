@@ -1,6 +1,6 @@
 # NoteKitab
 
-NoteKitab is a Full Stack Note app for storing notes and stores user details too.
+NoteKitab is a Full Stack Note app for storing notes of the user with authentication system.
 
 ## Tech Stack
 
